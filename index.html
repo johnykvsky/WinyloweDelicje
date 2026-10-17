@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Winylowe Delicje — Spotkania</title>
+  <meta
+    name="description"
+    content="Winylowe Delicje — katalog i statystyki cyklicznych spotkań miłośników płyt winylowych i analogowego brzmienia (2012–2026). Przeglądaj odsłuchane albumy, wykonawców, roczniki i gatunki muzyczne."
+  />
+  <meta
+    name="keywords"
+    content="Winylowe Delicje, płyty winylowe, winyle, odsłuchy, analogowe brzmienie, audiofile, muzyka z winyli, katalog płyt, spotkania muzyczne, rock progresywny, jazz, elektronika"
+  />
+  <meta name="author" content="Winylowe Delicje" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#111318" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pl_PL" />
+  <meta property="og:site_name" content="Winylowe Delicje" />
+  <meta property="og:title" content="Winylowe Delicje — Archiwum spotkań miłośników analogowego brzmienia" />
+  <meta
+    property="og:description"
+    content="Katalog i statystyki cyklicznych spotkań miłośników płyt winylowych (2012–2026) — ponad 200 odsłuchanych albumów, zestawienia dekad, roczników, wykonawców i gatunków."
+  />
+
+  <!-- Inline SVG Vinyl Favicon -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23111318'/%3E%3Ccircle cx='32' cy='32' r='27' stroke='%23e5a93c' stroke-width='3.5'/%3E%3Ccircle cx='32' cy='32' r='19' stroke='%23e5a93c' stroke-width='1.5' stroke-dasharray='5 3' opacity='0.7'/%3E%3Ccircle cx='32' cy='32' r='9' stroke='%23e5a93c' stroke-width='2.5'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%23e5a93c'/%3E%3C/svg%3E"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#spotkania" class="brand" data-main-tab="meetings">
+        <svg class="brand-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="3.5"/>
+          <circle cx="32" cy="32" r="21" stroke="currentColor" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.65"/>
+          <circle cx="32" cy="32" r="15" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.65"/>
+          <circle cx="32" cy="32" r="9" stroke="currentColor" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="3" fill="currentColor"/>
+        </svg>
+        <div>
+          <span class="brand-title">Winylowe Delicje</span>
+          <span class="brand-subtitle">Archiwum cyklicznych spotkań miłośników analogowego brzmienia</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" aria-label="Główna nawigacja">
+        <a href="#spotkania" class="nav-link active" data-main-tab="meetings" aria-current="page">Spotkania</a>
+        <a href="#statystyki" class="nav-link" data-main-tab="stats">Statystyki</a>
+        <button type="button" id="theme-toggle" class="theme-btn" aria-label="Przełącz motyw">☀️ Jasny motyw</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="view-meetings">
+      <section class="filters-panel" aria-label="Filtry i wyszukiwanie">
+        <div class="filters-grid">
+          <div class="filter-group">
+            <label for="filter-meeting-year">Rok spotkania</label>
+            <select id="filter-meeting-year" class="filter-select">
+              <option value="">Wszystkie lata (2012–2026)</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filter-artist">Wykonawca</label>
+            <div class="input-wrap">
+              <input
+                type="search"
+                id="filter-artist"
+                class="filter-input"
+                placeholder="np. Pink Floyd, SBB, Niemen..."
+                autocomplete="off"
+              />
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label for="filter-album">Album</label>
+            <div class="input-wrap">
+              <input
+                type="search"
+                id="filter-album"
+                class="filter-input"
+                placeholder="np. Dark Side, Oxygene..."
+                autocomplete="off"
+              />
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label for="filter-album-year">Rok wydania albumu</label>
+            <select id="filter-album-year" class="filter-select">
+              <option value="">Wszystkie roczniki płyt</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filter-genre">Gatunek</label>
+            <select id="filter-genre" class="filter-select">
+              <option value="">Wszystkie gatunki</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filters-footer">
+          <div class="filters-meta">
+            <span id="results-count" class="results-count">Ładowanie spotkań...</span>
+            <label class="checkbox-label">
+              <input type="checkbox" id="filter-show-special" />
+              Pokaż odwołane / przerwy
+            </label>
+            <div id="active-tags" class="active-tags"></div>
+          </div>
+
+          <div class="filters-actions">
+            <button type="button" id="btn-reset-filters" class="btn-reset" disabled>
+              Wyczyść filtry
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="meetings-list" class="meetings-list" aria-live="polite">
+        <!-- Meetings rendered via js/app.js -->
+      </section>
+    </div>
+
+    <div id="view-stats" hidden>
+      <div id="stats-root">
+        <!-- Statistics rendered via js/stats.js -->
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    Winylowe Delicje • Katalog spotkań (2012–2026)
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/stats.js"></script>
+</body>
+</html>
